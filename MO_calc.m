@@ -11,8 +11,8 @@ function [Mo, invMo] = MO_calc(A, C)
 Mo = zeros(size(A));
 
 % Calculate Mc
-for i = 1:length(A)
-    Mo(:,i) = C*A^(i-1);
+for i = 1:size(C,1):length(A)
+    Mo(i:i-1+size(C,1),:) = C*A^((i-1)/(size(C,1)));
 end
 
 invMo = inv(Mo);

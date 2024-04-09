@@ -11,7 +11,7 @@ function [Mc, invMc] = MC_calc(A, B);
 Mc = zeros(size(A));
 
 % Calculate Mc
-for i = 1:length(A)
+for i = 1:size(B,2):length(A)
     Mc(:,i) = A^(i-1)*B;
 end
 
