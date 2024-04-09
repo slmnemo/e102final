@@ -12,7 +12,7 @@ Mc = zeros(size(A));
 
 % Calculate Mc
 for i = 1:size(B,2):length(A)
-    Mc(:,i) = A^(i-1)*B;
+    Mc(:,i) = A^((i-1)/size(B,2))*B;
 end
 
 invMc = inv(Mc);
