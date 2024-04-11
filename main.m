@@ -11,15 +11,15 @@ pmod = 10;
 % Pole calculations
 
 zetaCon = 1.01;
-wCon = 1.98;
+wCon = 2.016;
 conPolynom = [1 2*zetaCon*wCon wCon^2];
 conPoles = roots(conPolynom);
 r_con_p = real(min(conPoles));
 i_con_p = imag(min(conPoles));
-conPoles = [conPoles', pmod*r_con_p, (pmod+1)*r_con_p];
+conPoles = [conPoles', pmod*r_con_p, (pmod+0.1)*r_con_p];
 
 zetaObs = 1;
-wObs = 8;
+wObs = 1;
 obsPolynom = [1 2*zetaObs*wObs wObs^2];
 obsPoles = roots(obsPolynom);
 % sys = tf(wObs^2, obsPolynom);
@@ -62,7 +62,7 @@ Lo = place(A', C', obsPoles)';
 
 % Calculate Ki for the system
 
-Ki = 15*r_con_p;
+Ki = pmod*r_con_p;
 
 % Simulate Simulink model
 
