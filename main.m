@@ -6,12 +6,12 @@ clear
 L = 0.5;
 g = 9.8;
 alpha = 0.5;
-pmod = 10;
+pmod = 7;
 
 % Pole calculations
 
 zetaCon = 1.01;
-wCon = 2.016;
+wCon = 2.92;
 conPolynom = [1 2*zetaCon*wCon wCon^2];
 conPoles = roots(conPolynom);
 r_con_p = real(min(conPoles));
