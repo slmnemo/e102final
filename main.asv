@@ -5,21 +5,22 @@ clear
 
 L = 0.5;
 g = 9.8;
-alpha = 0.5;
-pmod = 7;
+% Test variables
+xex = [1;2;3;4];
+uex = 1;
 
 % Pole calculations
 
-zetaCon = 1.01;
-wCon = 2.92;
+zetaCon = 1.5;
+wCon = 1;
 conPolynom = [1 2*zetaCon*wCon wCon^2];
 conPoles = roots(conPolynom);
 r_con_p = real(min(conPoles));
 i_con_p = imag(min(conPoles));
-conPoles = [conPoles', pmod*r_con_p, (pmod+0.1)*r_con_p];
+conPoles = [conPoles', 15*r_con_p, 16*r_con_p];
 
 zetaObs = 1;
-wObs = 1;
+wObs = 13.2;
 obsPolynom = [1 2*zetaObs*wObs wObs^2];
 obsPoles = roots(obsPolynom);
 % sys = tf(wObs^2, obsPolynom);
@@ -28,7 +29,7 @@ obsPoles = roots(obsPolynom);
 min_obs_pole = max(obsPoles);
 r_obs_p = real(min_obs_pole);
 i_obs_p = imag(min_obs_pole);
-obsPoles = [obsPoles', pmod*(r_obs_p+i_obs_p),pmod*(r_obs_p-i_obs_p)];
+obsPoles = [obsPoles', 15*r_obs_p+15*i_obs_p,15*r_obs_p-15*i_obs_p];
 
 
 % Define A, B, C, and D
@@ -62,10 +63,11 @@ Lo = place(A', C', obsPoles)';
 
 % Calculate Ki for the system
 
-Ki = pmod*r_con_p;
+Ki = 15*r_con_p;
 
 % Simulate Simulink model
 
 sim_run = sim("plant.mdl");
-plot(sim_run.yout)
+figure(1)
+plot(sim_run.yout);
 
