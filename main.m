@@ -14,7 +14,7 @@ testmode = true;
 % Pole calculations
 
 zetaCon = 1.2;
-wCon = 0.5;
+wCon = 0.6;
 conPolynom = [1 2*zetaCon*wCon wCon^2];
 conPoles = roots(conPolynom);
 r_con_p = real(min(conPoles));

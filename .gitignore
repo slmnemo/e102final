@@ -1,0 +1,13 @@
+
+# Ignore MATLAB files that aren't scripts
+*.asv
+*.mat
+*.slcx
+*.autosave
+slprj/*
+
+# Ignore pdfs, csvs
+*/*.pdf
+*/*.csv
+*/*.*swp
+
