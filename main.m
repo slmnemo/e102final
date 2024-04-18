@@ -3,36 +3,17 @@ clear
 clf
 
 % Variable definitions
-
 L = 0.5;
 g = 9.8;
 alpha = 0.5;
-pmod = 10;
-dist = 0;
-testmode = true;
+testmode = false;
 
-% Pole calculations
+dist = 0.7;
 
-zetaCon = 1.2;
-wCon = 0.5;
-conPolynom = [1 2*zetaCon*wCon wCon^2];
-conPoles = roots(conPolynom);
-r_con_p = real(min(conPoles));
-i_con_p = imag(min(conPoles));
-conPoles = [conPoles', pmod*r_con_p, (pmod+1)*r_con_p];
-
-zetaObs = 1.5;
-wObs = 1;
-obsPolynom = [1 2*zetaObs*wObs wObs^2];
-obsPoles = roots(obsPolynom);
-% sys = tf(wObs^2, obsPolynom);
-% step(sys)
-
-min_obs_pole = max(obsPoles);
-r_obs_p = real(min_obs_pole);
-i_obs_p = imag(min_obs_pole);
-obsPoles = [obsPoles', pmod*(r_obs_p+i_obs_p),pmod*(r_obs_p-i_obs_p)];
-
+% Pole modifiers
+conPmod = 10;
+obsPmod = 50;
+KiPmod = 10;
 
 % Define A, B, C, and D
 
@@ -58,38 +39,58 @@ D = [
 [Mc, invMc] = testControllability(A, B);
 [Mo, invMo] = testObservability(A, C);
 
-% Calculate Observer and Controller using poles
+%% Pole calculations
 
-K_old = place(A, B, conPoles);
+% Below shows the ideal system response for a step input, perfect
+% observation, and no disturbances. 
+% Later, we need to tune these poles because of our observer and
+% disturbances.
+
+% 2nd order dominant system
+zeta = 1.002;
+wn = 0.6;
+domPolynom = [1 2*zeta*wn wn^2];
+domPoles = roots(domPolynom);
+conPoles = [domPoles' min(domPoles)*conPmod min(domPoles)*1.2*(conPmod)];
+
+% The observer poles are just the controller poles but made to be 
+% decently faster.
+obsPoles = obsPmod*conPoles;
 Lo = place(A', C', obsPoles)';
-
-% Calculate Ki for the system
-
-Ki_old = pmod*r_con_p;
-
 
 % Calculate Ki_fb and K_fb using integral action state matrices
 
-conPoles = [conPoles(end)+0.1, conPoles];
+% Add the fifth pole, the integral control pole.
+KiPole = domPoles(1)*KiPmod;
+allPoles = [conPoles KiPole]; 
 
-Aaf = [
+
+Aa = [
     0, -C(2,:); 
     zeros(4,1), A
     ];
-Baf = [
+Ba = [
     -D(2); B
 ];
 
-Ktot = place(Aaf, Baf, conPoles);
-Ki = Ktot(1)
-K = Ktot(2:end)
+Ktot = acker(Aa, Ba, allPoles);
+Ki = -Ktot(1);
+K = Ktot(2:end);
+
+
+disp(['dist: ' num2str(dist) ]);
+disp(['conPmod: ' num2str(conPmod) ]);
+disp(['obsPmod: ' num2str(obsPmod) ]);
+disp(['KiPmod: ' num2str(KiPmod) ]);
+disp(['zeta: ' num2str(zeta) ' wn: ' num2str(wn)]);
+disp(['allPoles: ' num2str(allPoles)]);
 
 % Simulate Simulink model
 if testmode
     sim_run = sim("plant.mdl");
     plot(sim_run.yout)
 else
-    distvec = 0:0.1:0.5;
+    distvec = 0:0.1:1;
     
     i = 1;
     
