@@ -5,15 +5,15 @@ clf
 % Variable definitions
 L = 0.5;
 g = 9.8;
-alpha = 0.5;
+zeta = 1.005;
+wn = 0.7;
 testmode = false;
-
-dist = 0.7;
+dis = 0.5;
 
 % Pole modifiers
 conPmod = 10;
 obsPmod = 50;
-KiPmod = 10;
+KiPmod = 10.2;
 
 % Define A, B, C, and D
 
@@ -36,19 +36,13 @@ D = [
     0
     ];
 
-[Mc, invMc] = testControllability(A, B);
-[Mo, invMo] = testObservability(A, C);
-
-%% Pole calculations
-
+% Pole calculations
 % Below shows the ideal system response for a step input, perfect
 % observation, and no disturbances. 
 % Later, we need to tune these poles because of our observer and
 % disturbances.
 
 % 2nd order dominant system
-zeta = 1.002;
-wn = 0.6;
 domPolynom = [1 2*zeta*wn wn^2];
 domPoles = roots(domPolynom);
 conPoles = [domPoles' min(domPoles)*conPmod min(domPoles)*1.2*(conPmod)];
@@ -74,15 +68,9 @@ Ba = [
 ];
 
 Ktot = acker(Aa, Ba, allPoles);
-Ki = -Ktot(1);
+Ki = Ktot(1);
 K = Ktot(2:end);
 
-
-disp(['dist: ' num2str(dist) ]);
-disp(['conPmod: ' num2str(conPmod) ]);
-disp(['obsPmod: ' num2str(obsPmod) ]);
-disp(['KiPmod: ' num2str(KiPmod) ]);
-disp(['zeta: ' num2str(zeta) ' wn: ' num2str(wn)]);
 disp(['allPoles: ' num2str(allPoles)]);
 
 % Simulate Simulink model
@@ -90,29 +78,34 @@ if testmode
     sim_run = sim("plant.mdl");
     plot(sim_run.yout)
 else
-    distvec = 0:0.1:1;
+    distvec = 0:0.05:0.8;
     
     i = 1;
     
     figurefolder = "figures/";
     figprefix = "sim_displacement_";
     
-    for dist=distvec
-        figure(i)
+    for dim=distvec
+        dis = dim;
+        hws = get_param(bdroot,'modelworkspace');
+        hws.assignin('dis',dis)
         sim_run = sim("plant.mdl");
         s = sim_run.yout{2}.Values.Data;
         theta = sim_run.yout{3}.Values.Data;
-        a = sim_run.yout{4}.Values.Data;
+        a = sim_run.yout{1}.Values.Data;
+        dis_act = sim_run.yout{4}.Values.Data;
         time = sim_run.tout;
+        figure(i)
         hold on
         plot(time, s)
         plot(time, theta)
         plot(time, a)
+        plot(time,dis_act)
         xlabel("Time (s)")
         ylabel("Magnitude of output")
         legend("Displacement [m]", "Angle of Pendulum [rad]", "Acceleration [$m/s^2$]")
-        title("System response to disturbance of "+num2str(dist)+" in rad/s")
-        saveas(i,figurefolder+num2str(dist)+".png")
+        title("System response to disturbance of "+num2str(dis)+" in rad/s")
+        saveas(i,figurefolder+figprefix+num2str(dis)+".png")
         close(i)
         i = i + 1;
     end
