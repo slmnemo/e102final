@@ -62,7 +62,7 @@ Given state vector $\bar{x} = \begin{bmatrix} \theta \\ \dot{\theta} \\ s \\ \do
              \end{bmatrix}$ \\
         \hline
         B & $\begin{bmatrix}
-                0 & -\frac{1}{L} & 0 & 1
+                0 \\ -\frac{1}{L} \\ 0 \\ 1
              \end{bmatrix}$ \\
         \hline
         C & $\begin{bmatrix}
@@ -71,7 +71,7 @@ Given state vector $\bar{x} = \begin{bmatrix} \theta \\ \dot{\theta} \\ s \\ \do
              \end{bmatrix}$ \\
         \hline
         D & $\begin{bmatrix}
-                0
+                0 \\ 0
              \end{bmatrix}$ \\
         \hline
     \end{tabular}
@@ -103,4 +103,60 @@ We note that for our system as described above, we can calculate $M_c$ and $M_o$
 
 which are both invertible and thus the system is both invertible and controllable.
 
+<<<<<<< Updated upstream
+=======
+In addition, we created a Simulink model for simulation with saturation. This is pictured along with any MATLAB code in the Appendix.
+
+\section{State Space Design for Linear System}
+
+Now we will design a controller in feedback to tune the poles of the system to have the desired response characteristics. We will also design an observer to estimate the state of the system quickly and implement integral action to deal with the disturbance and ensure 0 steady state error without overshoot.
+
+Since our input is 1D and our state is 4D, we will have a fifth order system. To make designing the poles easier, we can place two of the poles to be dominant to make the system behave like 2nd order. The other three poles could then be placed to be much faster than the dominant poles so as to not contribute to the system dynamics.
+
+To find where to place the dominant poles to satisfy the desired response characteristics, we can assume $\zeta \ge 1$ to allow for no overshooting. To find a starting point for $\omega_n$, we can solve the critically damped general equation for a unit step input and settling time (within 99\%) of 10 seconds:
+
+\begin{align*}
+    x(t_s) &= 0.99 = \frac{1}{\omega_n^2}(1-e^{-\omega_nt_s} - \omega_nt_se^{-\omega_nt_s}) \\
+    t_s &= 8
+\end{align*}
+
+Plugging this into Wolfram Alpha, $\omega_n \approx 1$. This was the starting point for the poles to be tuned. A MATLAB script was then written to find the roots of the characteristic polynomial, the dominant poles, given $\zeta$ and $\omega_n$. The non-dominant poles were then placed to be approximately ten times faster than the dominant poles.
+
+Now that we have poles, we need to calculate the feedback matrices for an integral action system so that we can use the place command. Note that since our integral action only acts on one output, we only use the row from $C$ which is multiplied by $s$. This results in the following matrices
+
+\begin{center}
+    \begin{tabular}{| c | c |}
+        \hline
+        $A_{af}$ & $\begin{bmatrix}
+                0 & 0 & 0 & -1 & 0 \\
+                0 & 0 & 1 & 0 & 0 \\
+                0 & \frac{g}{L} & 0 & 0 & 0 \\
+                0 & 0 & 0 & 1 \\
+                0 & 0 & 0 & 0
+             \end{bmatrix}$ \\
+        \hline
+        $B_{af}$ & $\begin{bmatrix}
+                0 \\ 0 \\ -\frac{1}{L} \\ 0 \\ 1
+             \end{bmatrix}$ \\
+        \hline
+        $C_{af}$ & $\begin{bmatrix}
+                0 & 0 & 0 & 1 & 0
+             \end{bmatrix}$ \\
+        \hline
+        $D_{af}$ & $\begin{bmatrix}
+                0 \\ 0
+             \end{bmatrix}$ \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\section{Simulation of Nonlinear System using Linear Controller}
+
+The model was simulated via Simulink and the displacement over time graph was obtained. Then, we tuned the controller poles by changing $\zeta$ and $\omega_n$ slightly until the desired characteristics of the response was obtained.
+
+The result was: $\omega_n = 2.3$ and $\zeta = 1$. The graphs are shown below.
+
+\section{Results and Conclusion}
+
+>>>>>>> Stashed changes
 \end{document}
