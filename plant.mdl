@@ -1567,6 +1567,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_root.xml
     <P Name="Position">[470, 177, 515, 223]</P>
     <P Name="ZOrder">106</P>
     <P Name="Gain">-Ki</P>
+    <P Name="Gain">-Ki</P>
   </Block>
   <Block BlockType="Gain" Name="Gain1" SID="30">
     <P Name="Position">[565, 390, 610, 430]</P>
@@ -1799,6 +1800,7 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
           <P Name="SceneRectInView" Class="double">[-438.94103831491913, -51.73773267515989, 1012.135119047619, 562.35952380952381]</P>
         </Object>
       </Array>
+      <Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*2">
       <Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*2">
         <Object ObjectID="8">
           <P Name="Type" Class="char">Simulink:Editor:ReferencedFiles</P>
