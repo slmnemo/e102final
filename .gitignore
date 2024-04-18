@@ -2,7 +2,7 @@
 # Ignore MATLAB files that aren't scripts
 *.asv
 *.mat
-*.slcx
+*.slxc
 *.autosave
 slprj/*
 

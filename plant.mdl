@@ -7,6 +7,7 @@ __MWOPC_PACKAGE_BEGIN__ R2023b
 __MWOPC_PART_BEGIN__ /[Content_Types].xml
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default ContentType="application/vnd.mathworks.matlab.mxarray+binary" Extension="mxarray"/>
   <Default ContentType="application/vnd.openxmlformats-package.relationships+xml" Extension="rels"/>
   <Default ContentType="application/vnd.mathworks.simulink.mdl+xml" Extension="xml"/>
   <Override ContentType="application/vnd.openxmlformats-package.core-properties+xml" PartName="/metadata/coreProperties.xml"/>
@@ -29,6 +30,7 @@ __MWOPC_PART_BEGIN__ /_rels/.rels
   <Relationship Id="blockDiagramDefaults" Target="simulink/bddefaults.xml" Type="http://schemas.mathworks.com/simulink/2017/relationships/blockDiagramDefaults"/>
   <Relationship Id="configSetInfo" Target="simulink/configSetInfo.xml" Type="http://schemas.mathworks.com/simulink/2014/relationships/configSetInfo"/>
   <Relationship Id="modelDictionary" Target="simulink/modelDictionary.xml" Type="http://schemas.mathworks.com/simulinkModel/2016/relationships/modelDictionary"/>
+  <Relationship Id="modelWorkspace" Target="simulink/modelWorkspace.mxarray" Type="http://schemas.mathworks.com/simulinkModel/2010/relationships/modelWorkspaceData"/>
   <Relationship Id="rId1" Target="metadata/mwcoreProperties.xml" Type="http://schemas.mathworks.com/package/2012/relationships/coreProperties"/>
   <Relationship Id="rId2" Target="metadata/mwcorePropertiesExtension.xml" Type="http://schemas.mathworks.com/package/2014/relationships/corePropertiesExtension"/>
   <Relationship Id="rId3" Target="metadata/mwcorePropertiesReleaseInfo.xml" Type="http://schemas.mathworks.com/package/2019/relationships/corePropertiesReleaseInfo"/>
@@ -42,8 +44,8 @@ __MWOPC_PART_BEGIN__ /metadata/coreProperties.xml
   <dcterms:created xsi:type="dcterms:W3CDTF">2024-04-08T23:49:07Z</dcterms:created>
   <dc:creator>kaitlin</dc:creator>
   <cp:lastModifiedBy>kaitlin</cp:lastModifiedBy>
-  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-04-13T05:32:41Z</dcterms:modified>
-  <cp:revision>1.16</cp:revision>
+  <dcterms:modified xsi:type="dcterms:W3CDTF">2024-04-17T23:07:02Z</dcterms:modified>
+  <cp:revision>1.25</cp:revision>
   <cp:version>R2023b</cp:version>
 </cp:coreProperties>
 
@@ -109,7 +111,7 @@ __MWOPC_PART_BEGIN__ /simulink/blockdiagram.xml
     <ConfigManagerSettings>
       <P Name="ModifiedByFormat">%&lt;Auto&gt;</P>
       <P Name="ModifiedDateFormat">%&lt;Auto&gt;</P>
-      <P Name="ModelVersionFormat">%&lt;AutoIncrement:1.16&gt;</P>
+      <P Name="ModelVersionFormat">%&lt;AutoIncrement:1.25&gt;</P>
     </ConfigManagerSettings>
     <SimulationSettings>
       <P Name="SimulationMode">normal</P>
@@ -151,7 +153,7 @@ __MWOPC_PART_BEGIN__ /simulink/configSet0.xml
         <P Name="Description"/>
         <P Name="Components" Class="double">[]</P>
         <P Name="StartTime">0.0</P>
-        <P Name="StopTime">100</P>
+        <P Name="StopTime">30</P>
         <P Name="AbsTol">auto</P>
         <P Name="AutoScaleAbsTol">on</P>
         <P Name="FixedStep">auto</P>
@@ -176,7 +178,7 @@ __MWOPC_PART_BEGIN__ /simulink/configSet0.xml
         <P Name="ZeroCrossControl">UseLocalSettings</P>
         <P Name="ZeroCrossAlgorithm">Nonadaptive</P>
         <P Name="AlgebraicLoopSolver">Auto</P>
-        <P Name="SolverInfoToggleStatus">off</P>
+        <P Name="SolverInfoToggleStatus">on</P>
         <P Name="IsAutoAppliedInSIP">off</P>
         <P Name="SolverResetMethod">Fast</P>
         <P Name="PositivePriorityOrder">off</P>
@@ -477,7 +479,7 @@ __MWOPC_PART_BEGIN__ /simulink/configSet0.xml
         <P Name="DisabledProps" Class="double">[]</P>
         <P Name="Description"/>
         <P Name="Components" Class="double">[]</P>
-        <P Name="UpdateModelReferenceTargets">IfOutOfDateOrStructuralChange</P>
+        <P Name="UpdateModelReferenceTargets">Force</P>
         <P Name="EnableRefExpFcnMdlSchedulingChecks">off</P>
         <P Name="CheckModelReferenceTargetMessage">error</P>
         <P Name="EnableParallelModelReferenceBuilds">off</P>
@@ -881,8 +883,8 @@ __MWOPC_PART_BEGIN__ /simulink/configSet0.xml
       </Object>
     </Array>
     <P Name="Name">Configuration</P>
-    <P Name="CurrentDlgPage">Solver</P>
-    <P Name="ConfigPrmDlgPosition">[ 0, 0, 0, 0 ]</P>
+    <P Name="CurrentDlgPage">Simulation Target</P>
+    <P Name="ConfigPrmDlgPosition">[ 71, 71, 900, 710 ]</P>
     <P Name="ExtraOptions"/>
   </Object>
 </ConfigSet>
@@ -901,28 +903,28 @@ __MWOPC_PART_BEGIN__ /simulink/graphicalInterface.xml
   <Outport Name="Out1">
     <P Name="BusObject"/>
     <P Name="BusOutputAsStruct">off</P>
-    <P Name="SignalName">a(t)</P>
+    <P Name="SignalName">asat</P>
     <P Name="UnitExpr">inherit</P>
     <P Name="OutportClientType">off</P>
   </Outport>
   <Outport Name="s">
     <P Name="BusObject"/>
     <P Name="BusOutputAsStruct">off</P>
-    <P Name="SignalName">s(t)</P>
+    <P Name="SignalName">s</P>
     <P Name="UnitExpr">inherit</P>
     <P Name="OutportClientType">off</P>
   </Outport>
   <Outport Name="theta">
     <P Name="BusObject"/>
     <P Name="BusOutputAsStruct">off</P>
-    <P Name="SignalName">theta(t)</P>
+    <P Name="SignalName">theta</P>
     <P Name="UnitExpr">inherit</P>
     <P Name="OutportClientType">off</P>
   </Outport>
-  <Outport Name="Out2">
+  <Outport Name="Out3">
     <P Name="BusObject"/>
     <P Name="BusOutputAsStruct">off</P>
-    <P Name="SignalName">r(t)</P>
+    <P Name="SignalName">a</P>
     <P Name="UnitExpr">inherit</P>
     <P Name="OutportClientType">off</P>
   </Outport>
@@ -948,10 +950,225 @@ __MWOPC_PART_BEGIN__ /simulink/graphicalInterface.xml
 __MWOPC_PART_BEGIN__ /simulink/modelDictionary.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <MF0 version="1.1" defaultPackage="slid" packageUris="http://schema.mathworks.com/mf0/slid/R2023a_20220628">
-  <System type="System" uuid="596f8e17-ac48-4622-ba93-5b5dd5560c18">
-    <Interface type="Interface" uuid="9253437f-bace-4bf5-bd1f-fcf374621370"/>
+  <System type="System" uuid="9fc20088-ba43-4219-801f-c39b89c07cff">
+    <Parameter type="Parameter" uuid="2f22ca6a-7a10-4211-b782-00d2288cd00a">
+      <Identifier>A</Identifier>
+      <Name>A</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="c2c67b0b-afeb-488e-a714-553d7994819d">
+      <Identifier>Aaf</Identifier>
+      <Name>Aaf</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="2747201a-1092-4d75-a555-ff5745b2029b">
+      <Identifier>B</Identifier>
+      <Name>B</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="840df7e1-ae05-4a5e-aa7d-8b1327cff916">
+      <Identifier>Baf</Identifier>
+      <Name>Baf</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="4d036287-d1a0-45a5-bef0-826192fc3f88">
+      <Identifier>C</Identifier>
+      <Name>C</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="2fc8a622-f9b3-4de9-b880-c1775a058993">
+      <Identifier>D</Identifier>
+      <Name>D</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="843db8f5-5b35-463c-89c5-e03e236d6a28">
+      <Identifier>K</Identifier>
+      <Name>K</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="06e048ef-2896-4d08-8ae4-3f3fc247d6e8">
+      <Identifier>Ki</Identifier>
+      <Name>Ki</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="0d9956c5-84c4-417e-9e8e-4f0c5872ae00">
+      <Identifier>Ktot</Identifier>
+      <Name>Ktot</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="25e4c160-2cd8-43b2-994e-6ebb8031ffbd">
+      <Identifier>L</Identifier>
+      <Name>L</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="3aa98a82-e752-43fa-bf72-56b642b7b76f">
+      <Identifier>Lo</Identifier>
+      <Name>Lo</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="d1f59aa2-3dad-4085-8ef0-573be6c3566b">
+      <Identifier>ang_disp</Identifier>
+      <Name>ang_disp</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="d8d3f9ba-c110-4d4b-8bfc-cdbfe9f6460c">
+      <Identifier>ang_dist</Identifier>
+      <Name>ang_dist</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="073b10c7-e1ec-48a7-a5e6-17da6d3a43b1">
+      <Identifier>conPoles</Identifier>
+      <Name>conPoles</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="363f52a1-abfa-4f09-bd73-001760e98154">
+      <Identifier>conPolynom</Identifier>
+      <Name>conPolynom</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="80fb9361-9636-4f6c-8317-4da6f11a1c08">
+      <Identifier>disp</Identifier>
+      <Name>disp</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="b16fc100-94da-4593-8009-07e4670a5c0c">
+      <Identifier>dist</Identifier>
+      <Name>dist</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="000d6a4e-4b1e-4516-a2cc-c64b6eb1c88c">
+      <Identifier>g</Identifier>
+      <Name>g</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="7e9b07d1-705e-4bb9-a762-32a8fd4b21e8">
+      <Identifier>h</Identifier>
+      <Name>h</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="72937ccf-b818-4dec-a765-d1b1050bbd06">
+      <Identifier>i_obs_p</Identifier>
+      <Name>i_obs_p</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="a12ec21d-5a7b-48a9-b987-d5248919592f">
+      <Identifier>min_obs_pole</Identifier>
+      <Name>min_obs_pole</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="462771f2-b434-4a61-a622-befecd596455">
+      <Identifier>obsPoles</Identifier>
+      <Name>obsPoles</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="687d18b5-ff4f-4bb9-a897-61694d8ad378">
+      <Identifier>obsPolynom</Identifier>
+      <Name>obsPolynom</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="82cfdc5f-c61e-4f69-a58a-298b798f75fb">
+      <Identifier>omegaCon</Identifier>
+      <Name>omegaCon</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="b8dd02d2-9a69-4e75-bd4a-0ad8adca6fcb">
+      <Identifier>p</Identifier>
+      <Name>p</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="abc7a717-1705-41ad-a09b-53cb4f7e8ed6">
+      <Identifier>pmod</Identifier>
+      <Name>pmod</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="2be34269-1212-4839-8eed-35083c7847ef">
+      <Identifier>r_con_p</Identifier>
+      <Name>r_con_p</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="75a3b616-7243-4863-a28f-c1300b3eec5e">
+      <Identifier>r_obs_p</Identifier>
+      <Name>r_obs_p</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="f5c76467-b810-4954-822d-fcee853df898">
+      <Identifier>wCon</Identifier>
+      <Name>wCon</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="f0323fe0-57fa-4a5b-b275-714f2280e8b6">
+      <Identifier>wObs</Identifier>
+      <Name>wObs</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="ca9d956c-c724-4566-a376-c4f0a72a6e4e">
+      <Identifier>zetaCon</Identifier>
+      <Name>zetaCon</Name>
+    </Parameter>
+    <Parameter type="Parameter" uuid="5e3c3b68-ac3a-47d1-b07a-221f2b4f65c1">
+      <Identifier>zetaObs</Identifier>
+      <Name>zetaObs</Name>
+    </Parameter>
+    <Interface type="Interface" uuid="084bd5bb-aa89-4603-b8e9-7598808ec856"/>
   </System>
 </MF0>
+__MWOPC_PART_BEGIN__ /simulink/modelWorkspace.mxarray BASE64
+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
 __MWOPC_PART_BEGIN__ /simulink/ScheduleCore.xml
 <?xml version="1.0" encoding="UTF-8"?>
 <sltp_graph version="1.1" packageUris="http://schema.mathworks.com/mf0/sltp_mm/R2023a_202209151115">
@@ -1457,7 +1674,7 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_root.xml
   <P Name="Open">on</P>
   <P Name="ZoomFactor">151</P>
   <P Name="ReportName">simulink-default.rpt</P>
-  <P Name="SIDHighWatermark">54</P>
+  <P Name="SIDHighWatermark">55</P>
   <Block BlockType="BusCreator" Name="Bus&#xA;Creator" SID="36">
     <PortCounts in="2" out="1"/>
     <P Name="Position">[835, 416, 840, 454]</P>
@@ -1477,14 +1694,14 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_root.xml
   <Block BlockType="Step" Name="Disturbance" SID="54">
     <P Name="Position">[715, 125, 745, 155]</P>
     <P Name="ZOrder">120</P>
-    <P Name="Time">5</P>
-    <P Name="After">0.5</P>
+    <P Name="Time">0</P>
+    <P Name="After">disp</P>
     <P Name="SampleTime">0</P>
   </Block>
   <Block BlockType="Gain" Name="Gain" SID="27">
     <P Name="Position">[470, 177, 515, 223]</P>
     <P Name="ZOrder">106</P>
-    <P Name="Gain">Ki</P>
+    <P Name="Gain">-Ki</P>
   </Block>
   <Block BlockType="Gain" Name="Gain1" SID="30">
     <P Name="Position">[565, 390, 610, 430]</P>
@@ -1531,39 +1748,30 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_root.xml
   <Block BlockType="Outport" Name="Out1" SID="32">
     <P Name="Position">[780, 293, 810, 307]</P>
     <P Name="ZOrder">111</P>
-    <P Name="SignalName">a(t)</P>
+    <P Name="SignalName">asat</P>
   </Block>
   <Block BlockType="Outport" Name="s" SID="33">
     <P Name="Position">[995, 193, 1025, 207]</P>
     <P Name="ZOrder">112</P>
     <P Name="Port">2</P>
-    <P Name="SignalName">s(t)</P>
+    <P Name="SignalName">s</P>
   </Block>
   <Block BlockType="Outport" Name="theta" SID="34">
     <P Name="Position">[995, 133, 1025, 147]</P>
     <P Name="ZOrder">113</P>
     <P Name="Port">3</P>
-    <P Name="SignalName">theta(t)</P>
+    <P Name="SignalName">theta</P>
   </Block>
-  <Block BlockType="Outport" Name="Out2" SID="50">
-    <P Name="Position">[345, 148, 375, 162]</P>
-    <P Name="ZOrder">116</P>
+  <Block BlockType="Outport" Name="Out3" SID="55">
+    <P Name="Position">[610, 148, 640, 162]</P>
+    <P Name="ZOrder">121</P>
     <P Name="Port">4</P>
-    <P Name="SignalName">r(t)</P>
+    <P Name="SignalName">a</P>
   </Block>
   <Line>
     <P Name="ZOrder">1</P>
     <P Name="Src">24#out:1</P>
-    <P Name="Points">[16, 0]</P>
-    <Branch>
-      <P Name="ZOrder">50</P>
-      <P Name="Points">[0, -45]</P>
-      <P Name="Dst">50#in:1</P>
-    </Branch>
-    <Branch>
-      <P Name="ZOrder">49</P>
-      <P Name="Dst">25#in:1</P>
-    </Branch>
+    <P Name="Dst">25#in:1</P>
   </Line>
   <Line>
     <P Name="ZOrder">3</P>
@@ -1589,28 +1797,15 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_root.xml
   <Line>
     <P Name="ZOrder">9</P>
     <P Name="Src">28#out:1</P>
-    <P Name="Dst">31#in:1</P>
-  </Line>
-  <Line>
-    <P Name="ZOrder">10</P>
-    <P Name="Src">31#out:1</P>
-    <P Name="Points">[102, 0]</P>
+    <P Name="Points">[20, 0]</P>
     <Branch>
-      <P Name="ZOrder">12</P>
-      <P Name="Points">[0, 100]</P>
-      <Branch>
-        <P Name="ZOrder">36</P>
-        <P Name="Points">[0, 80]</P>
-        <P Name="Dst">4#in:1</P>
-      </Branch>
-      <Branch>
-        <P Name="ZOrder">35</P>
-        <P Name="Dst">32#in:1</P>
-      </Branch>
+      <P Name="ZOrder">105</P>
+      <P Name="Dst">31#in:1</P>
     </Branch>
     <Branch>
-      <P Name="ZOrder">11</P>
-      <P Name="Dst">1#in:2</P>
+      <P Name="ZOrder">104</P>
+      <P Name="Points">[0, -45]</P>
+      <P Name="Dst">55#in:1</P>
     </Branch>
   </Line>
   <Line>
@@ -1664,6 +1859,28 @@ __MWOPC_PART_BEGIN__ /simulink/systems/system_root.xml
     <P Name="Src">54#out:1</P>
     <P Name="Dst">1#in:1</P>
   </Line>
+  <Line>
+    <P Name="ZOrder">107</P>
+    <P Name="Src">31#out:1</P>
+    <P Name="Points">[120, 0]</P>
+    <Branch>
+      <P Name="ZOrder">109</P>
+      <P Name="Points">[0, 100]</P>
+      <Branch>
+        <P Name="ZOrder">111</P>
+        <P Name="Points">[0, 80]</P>
+        <P Name="Dst">4#in:1</P>
+      </Branch>
+      <Branch>
+        <P Name="ZOrder">110</P>
+        <P Name="Dst">32#in:1</P>
+      </Branch>
+    </Branch>
+    <Branch>
+      <P Name="ZOrder">108</P>
+      <P Name="Dst">1#in:2</P>
+    </Branch>
+  </Line>
 </System>
 
 __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
@@ -1690,10 +1907,10 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
           <P Name="IsTabbed" Class="logical">1</P>
           <P Name="ViewObjType" Class="char">SimulinkTopLevel</P>
           <P Name="LoadSaveID" Class="char">0</P>
-          <P Name="Extents" Class="double">[1502.0, 808.0]</P>
+          <P Name="Extents" Class="double">[1816.0, 808.0]</P>
           <P Name="ZoomFactor" Class="double">1.5113182423435421</P>
-          <P Name="Offset" Class="double">[170.44819206868772, -37.741940585112133]</P>
-          <P Name="SceneRectInView" Class="double">[170.44819206868772, -37.741940585112133, 993.83436123348008, 534.63259911894272]</P>
+          <P Name="Offset" Class="double">[66.565372685427747, -37.741940585112133]</P>
+          <P Name="SceneRectInView" Class="double">[66.565372685427747, -37.741940585112133, 1201.6, 534.63259911894272]</P>
         </Object>
         <Object ObjectID="6">
           <P Name="IsActive" Class="logical">0</P>
@@ -1716,18 +1933,18 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
           <P Name="SceneRectInView" Class="double">[-438.94103831491913, 0.26524351531628554, 1075.4285714285713, 461.71428571428572]</P>
         </Object>
       </Array>
-      <Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*3">
+      <Array PropName="DockComponentsInfo" Type="Simulink.DockComponentInfo" Dimension="1*2">
         <Object ObjectID="8">
-          <P Name="Type" Class="char">LibraryBrowser2 LibraryBrowserStudioComponent</P>
-          <P Name="ID" Class="char">plant</P>
+          <P Name="Type" Class="char">GLUE2:PropertyInspector</P>
+          <P Name="ID" Class="char">Property Inspector</P>
           <P Name="Visible" Class="logical">1</P>
           <P Name="CreateCallback" Class="char"/>
           <P Name="UserData" Class="char"/>
           <P Name="Floating" Class="logical">0</P>
-          <P Name="DockPosition" Class="char">Left</P>
-          <P Name="Width" Class="int32">304</P>
-          <P Name="Height" Class="int32">841</P>
-          <P Name="Minimized" Class="char">Unset</P>
+          <P Name="DockPosition" Class="char">Right</P>
+          <P Name="Width" Class="int32">640</P>
+          <P Name="Height" Class="int32">480</P>
+          <P Name="Minimized" Class="char">On</P>
         </Object>
         <Object ObjectID="9">
           <P Name="Type" Class="char">Simulink:Editor:ReferencedFiles</P>
@@ -1742,24 +1959,12 @@ __MWOPC_PART_BEGIN__ /simulink/windowsInfo.xml
           <P Name="Height" Class="int32">480</P>
           <P Name="Minimized" Class="char">Unset</P>
         </Object>
-        <Object ObjectID="10">
-          <P Name="Type" Class="char">GLUE2:PropertyInspector</P>
-          <P Name="ID" Class="char">Property Inspector</P>
-          <P Name="Visible" Class="logical">1</P>
-          <P Name="CreateCallback" Class="char"/>
-          <P Name="UserData" Class="char"/>
-          <P Name="Floating" Class="logical">0</P>
-          <P Name="DockPosition" Class="char">Right</P>
-          <P Name="Width" Class="int32">640</P>
-          <P Name="Height" Class="int32">480</P>
-          <P Name="Minimized" Class="char">On</P>
-        </Object>
       </Array>
-      <P Name="WindowState" Class="char">AAAA/wAAAAD9AAAAAwAAAAAAAAE0AAADZfwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAAAAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABiAP////wAAAB5AAADZQAAALcA////+gAAAAICAAAAA/sAAABgAFMAaQBtAHUAbABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZQBzAAAAAAD/////AAAAiwD////7AAAAbABMAGkAYgByAGEAcgB5AEIAcgBvAHcAcwBlAHIAMgAgAEwAaQBiAHIAYQByAHkAQgByAG8AdwBzAGUAcgBTAHQAdQBkAGkAbwBDAG8AbQBwAG8AbgBlAG4AdAAvAHUAbgB0AGkAdABsAGUAZAEAAAAA/////wAAAAAAAAAA+wAAAGYATABpAGIAcgBhAHIAeQBCAHIAbwB3AHMAZQByADIAIABMAGkAYgByAGEAcgB5AEIAcgBvAHcAcwBlAHIAUwB0AHUAZABpAG8AQwBvAG0AcABvAG4AZQBuAHQALwBwAGwAYQBuAHQBAAAAAP////8AAAC3AP///wAAAAEAAAAAAAAAAPwCAAAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZQBjAHQAbwByAAAAAAD/////AAABrAD///8AAAADAAAGBAAAAND8AQAAAAH7/////wAAAAAA/////wAAAVkA////AAAGBAAAA2UAAAABAAAAAgAAAAEAAAAC/AAAAAMAAAAAAAAAAQAAADYAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEwAZQBmAHQDAAAAAP////8AAAAAAAAAAAAAAAEAAAABAAAAOABjAG8AbABsAGEAcABzAGkAYgBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIAUgBpAGcAaAB0AwAAAAD/////AAAAAAAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAbwB0AHQAbwBtAAAAAAD/////AAAAAAAAAAA=</P>
+      <P Name="WindowState" Class="char">AAAA/wAAAAD9AAAAAwAAAAAAAAE0AAADZfwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAAAAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABiAP////wAAAB5AAADZQAAAAAA////+gAAAAECAAAAA/sAAABgAFMAaQBtAHUAbABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZQBzAAAAAAD/////AAAAiwD////7AAAAbABMAGkAYgByAGEAcgB5AEIAcgBvAHcAcwBlAHIAMgAgAEwAaQBiAHIAYQByAHkAQgByAG8AdwBzAGUAcgBTAHQAdQBkAGkAbwBDAG8AbQBwAG8AbgBlAG4AdAAvAHUAbgB0AGkAdABsAGUAZAEAAAAA/////wAAAAAAAAAA+wAAAGYATABpAGIAcgBhAHIAeQBCAHIAbwB3AHMAZQByADIAIABMAGkAYgByAGEAcgB5AEIAcgBvAHcAcwBlAHIAUwB0AHUAZABpAG8AQwBvAG0AcABvAG4AZQBuAHQALwBwAGwAYQBuAHQBAAAAAP////8AAAAAAAAAAAAAAAEAAAAAAAAAAPwCAAAAAfsAAABUAEcATABVAEUAMgA6AFAAcgBvAHAAZQByAHQAeQBJAG4AcwBwAGUAYwB0AG8AcgAvAFAAcgBvAHAAZQByAHQAeQAgAEkAbgBzAHAAZQBjAHQAbwByAAAAAAD/////AAABrAD///8AAAADAAAGBAAAAND8AQAAAAH7/////wAAAAAA/////wAAAVkA////AAAHPgAAA2UAAAABAAAAAgAAAAEAAAAC/AAAAAMAAAAAAAAAAQAAADYAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEwAZQBmAHQDAAAAAP////8AAAAAAAAAAAAAAAEAAAABAAAAOABjAG8AbABsAGEAcABzAGkAYgBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIAUgBpAGcAaAB0AwAAAAD/////AAAAAAAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAbwB0AHQAbwBtAAAAAAD/////AAAAAAAAAAA=</P>
       <Array PropName="PersistedApps" Type="Cell" Dimension="0*1"/>
       <P Name="WindowUuid" Class="char">ad1e1868-e3b4-4fec-9788-43d6f7569919</P>
     </Object>
-    <P Name="BDUuid" Class="char">c4ae1767-645e-4a7a-a836-10f756def945</P>
+    <P Name="BDUuid" Class="char">73f651b8-1cc1-4aa5-a42b-6c7bda339d22</P>
   </Object>
 </WindowsInfo>
 
