@@ -15,6 +15,7 @@ function [overshoot, t_settle, sim_data] = sim_invpendulum(ang_disp, zetaCon, wC
 
 if nargin < 4
     p = 0;
+
 end
 
 % Variable definitions
@@ -25,6 +26,9 @@ pmod = 10;
 
 % Pole calculations
 
+if zetaCon == 1
+    zetaCon=1.001;
+end
 conPolynom = [1 2*zetaCon*wCon wCon^2];
 conPoles = roots(conPolynom);
 r_con_p = real(min(conPoles));
