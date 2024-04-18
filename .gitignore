@@ -11,3 +11,6 @@ slprj/*
 */*.csv
 */*.*swp
 
+# Ignore figures
+figures/*.png
+

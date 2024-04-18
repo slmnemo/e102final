@@ -77,6 +77,8 @@ Lo = place(A', C', obsPoles)';
 % Simulate Simulink model and get stats
 dis = ang_dis;
 h = load_system("plant.mdl");
+hws = get_param(bdroot,'modelworkspace');
+hws.assignin('dis',dis)
 hws = get_param('plant','modelworkspace');
 list = whos;
 N = length(list);
